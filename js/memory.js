@@ -20,3 +20,30 @@ const  barajaTarjetas = () => {
 };
 
 // Construimos el tablero
+const reparteTarjetas = () => {
+    // seleccionamos el contenedor
+    const mesa = document.querySelector("#mesa");
+    // limpiamos por si habia cartas
+    mesa.innerHTML = " ";
+
+    // obtenemos las cartas mezcladas
+    const tarjetasBarajadas = barajaTarjetas();
+
+    tarjetasBarajadas.forEach( imagen  => {
+        // Contendra el contenedor de la tarjeta
+        const tarjeta = document.createElement("div");
+        // para los estilos 
+        tarjeta.className = "tarjeta";
+
+        // insertamos la imagen dentro con un div interior
+        tarjeta.innerHTML = `<div class="tarjeta_contenido"> ${imagen}</div>`;
+
+        // Añadimos la carta al DOM
+        mesa.appendChild(tarjeta);
+
+        // Agregamos la interactividad a esta tarjeta 
+        tarjeta.addEventListener("click", () =>{
+            
+        })
+    })
+}
