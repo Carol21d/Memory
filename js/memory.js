@@ -7,14 +7,16 @@ const grupoTarjetas = [
   {image : './assets/img/img_6.webp'},
   {image : './assets/img/img_7.webp'},
   {image : './assets/img/img_8.webp'},
-  {image : './assets/img/img_1.webp'},
-  {image : './assets/img/img_2.webp'},
-  {image : './assets/img/img_3.webp'},
-  {image : './assets/img/img_4.webp'},
-  {image : './assets/img/img_5.webp'},
-  {image : './assets/img/img_6.webp'},
-  {image : './assets/img/img_7.webp'},
-  {image : './assets/img/img_8.webp'}
+ 
 
 
 ];
+
+const totalBarajas = [ ...grupoTarjetas, ...grupoTarjetas];
+
+//  para  que los pares no esten desordenados
+const  barajaTarjetas = () => {
+    return totalBarajas.sort(() => Math.random() - 0.5);
+};
+
+// Construimos el tablero
