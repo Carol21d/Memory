@@ -1,26 +1,37 @@
-const grupoTarjetas = [
-  {image : './assets/img/img_1.webp'},
-  {image : './assets/img/img_2.webp'},
-  {image : './assets/img/img_3.webp'},
-  {image : './assets/img/img_4.webp'},
-  {image : './assets/img/img_5.webp'},
-  {image : './assets/img/img_6.webp'},
-  {image : './assets/img/img_7.webp'},
-  {image : './assets/img/img_8.webp'},
- 
+let parejasEncontradas = 0;
+let primeraSeleccion = null;
+let bloquearClick = false;
 
+const grupoTarjetas = [
+    { image: './assets/img/img_1.webp', valor: 'imagen 1' },
+    { image: './assets/img/img_2.webp', valor: 'imagen 2' },
+    { image: './assets/img/img_3.webp', valor: 'imagen 3'},
+    { image: './assets/img/img_4.webp', valor: 'imagen 5' },
+    { image: './assets/img/img_5.webp', valor: 'imagen 6' },
+    { image: './assets/img/img_6.webp', valor: 'imagen 7' },
+    { image: './assets/img/img_7.webp', valor: 'imagen 8' },
+    
 
 ];
 
-const totalBarajas = [ ...grupoTarjetas, ...grupoTarjetas];
 
-//  para  que los pares no esten desordenados
-const  barajaTarjetas = () => {
+
+const totalBarajas = [...grupoTarjetas, ...grupoTarjetas];
+
+//  para  que los pares  esten desordenados
+const barajaTarjetas = () => {
     return totalBarajas.sort(() => Math.random() - 0.5);
 };
 
 // Construimos el tablero
 const reparteTarjetas = () => {
+
+    // reiniciamos las variables
+    let parejasEncontradas = 0;
+    let primeraSeleccion = null;
+    let bloquearClick = false;
+   
+
     // seleccionamos el contenedor
     const mesa = document.querySelector("#mesa");
     // limpiamos por si habia cartas
@@ -29,21 +40,81 @@ const reparteTarjetas = () => {
     // obtenemos las cartas mezcladas
     const tarjetasBarajadas = barajaTarjetas();
 
-    tarjetasBarajadas.forEach( imagen  => {
+    tarjetasBarajadas.forEach(imagenCarta => {
         // Contendra el contenedor de la tarjeta
         const tarjeta = document.createElement("div");
         // para los estilos 
         tarjeta.className = "tarjeta";
 
+
+
         // insertamos la imagen dentro con un div interior
-        tarjeta.innerHTML = `<div class="tarjeta_contenido"> ${imagen}</div>`;
+    // tarjeta.innerHTML = `<div class="tarjeta_contenido"> ${imagen}</div>`;
+
+
+    tarjeta.dataset.valor = imagenCarta.valor;
+    // insertamos la imagen y su reverso
+    tarjeta.innerHTML = `
+            <div class="tarjeta_reverso"></div>
+            <div class="tarjeta_contenido">
+                <img src="${imagenCarta.image}" alt="Carta de memory">
+            </div>
+        `;
+
+
+
 
         // Añadimos la carta al DOM
         mesa.appendChild(tarjeta);
 
         // Agregamos la interactividad a esta tarjeta 
-        tarjeta.addEventListener("click", () =>{
+        tarjeta.addEventListener("click", () => {
+            // Si el juego está bloqueado o esta tarjeta ya está
+
+            if (bloquearClick || tarjeta.classList.contains("descubierta")) {
+                return;
+            }
+            // Mostramos la carta (visualmente)
+            tarjeta.classList.add("descubierta");
+
             
+            if (!primeraSeleccion) {
+                // Si no hay otra carta seleccionada, guardamos esta
+                primeraSeleccion = tarjeta;
+            } else {
+                // Ya hay una carta seleccionada → esta es la segunda
+                const segundaSeleccion = tarjeta;
+                // Obtenemos los imagenes internos de ambas
+                // const imagen1 = primeraSeleccion.querySelector(".tarjeta__contenido").innerText;
+                // const imagen2 = segundaSeleccion.querySelector(".tarjeta__contenido").innerText;
+                if (primeraSeleccion.dataset.valor === segundaSeleccion.dataset.valor) {
+                    // Coinciden → dejamos ambas descubiertasparejasEncontradas++; // Nuevo: contar parejas acertadas
+                    
+                    parejasEncontradas++;
+                    primeraSeleccion = null;
+                    // Comprobamos si el jugador ha ganado
+                    if (parejasEncontradas === grupoTarjetas.length) {
+                        setTimeout(() => {
+                            alert("¡Has ganado el memory!");
+                            reparteTarjetas(); // Reinicia el juego
+                        }, 500);
+                    }
+                } else {
+                    // No coinciden → taparlas tras 1 segundo
+                    bloquearClick = true;
+                    setTimeout(() => {
+
+                        primeraSeleccion.classList.remove("descubierta");
+                        segundaSeleccion.classList.remove("descubierta");
+                        primeraSeleccion = null;
+                        bloquearClick = false;
+
+                    }, 1000);
+                }
+            }
         })
-    })
-}
+    });
+};
+ 
+
+reparteTarjetas();
