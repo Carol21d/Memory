@@ -4,12 +4,13 @@ let bloquearClick = false;
 
 const grupoTarjetas = [
     { image: './assets/img/img_1.webp', valor: 'imagen 1' },
-    { image: './assets/img/img_2.webp', valor: 'imagen 2' },
+    { image: './assets/img/img_2.jpg', valor: 'imagen 2' },
     { image: './assets/img/img_3.webp', valor: 'imagen 3'},
-    { image: './assets/img/img_4.webp', valor: 'imagen 5' },
-    { image: './assets/img/img_5.webp', valor: 'imagen 6' },
-    { image: './assets/img/img_6.webp', valor: 'imagen 7' },
-    { image: './assets/img/img_7.webp', valor: 'imagen 8' },
+    { image: './assets/img/img_4.webp', valor: 'imagen 4' },
+    { image: './assets/img/img_5.webp', valor: 'imagen 5' },
+    { image: './assets/img/img_6.webp', valor: 'imagen 6' },
+    { image: './assets/img/img_7.webp', valor: 'imagen 7' },
+    { image: './assets/img/img_8.webp', valor: 'imagen 8' },
     
 
 ];

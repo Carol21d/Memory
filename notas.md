@@ -1,105 +1,74 @@
-<style>
-.angry-grid {
-   display: grid; 
-
-   grid-template-rows: 1fr 1fr 1fr;
-   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-   
-   gap: 0px;
-   height: 100%;
-   
+/* Estilos básicos del juego */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
-  
-#item-0 {
 
-   background-color: #BD55FD; 
-   grid-row-start: 1;
-   grid-column-start: 1;
-
-   grid-row-end: 2;
-   grid-column-end: 2;
-   
+h1 {
+    color: #4a4a4a;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
-#item-1 {
 
-   background-color: #B695CD; 
-   grid-row-start: 1;
-   grid-column-start: 2;
-
-   grid-row-end: 2;
-   grid-column-end: 3;
-   
+#mesa {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 15px;
+    perspective: 1000px; /* Para el efecto 3D de volteo */
 }
-#item-2 {
 
-   background-color: #78D9D7; 
-   grid-row-start: 1;
-   grid-column-start: 3;
-
-   grid-row-end: 2;
-   grid-column-end: 4;
-   
+/* Contenedor de la tarjeta que permite el volteo */
+.tarjeta {
+    width: 100px;
+    height: 100px;
+    position: relative; /* Para posicionar el reverso y el contenido */
+    transform-style: preserve-3d; /* Permite el volteo en 3D */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    cursor: pointer;
 }
-#item-3 {
 
-   background-color: #DFCA9A; 
-   grid-row-start: 1;
-   grid-column-start: 4;
-
-   grid-row-end: 2;
-   grid-column-end: 5;
-   
+/* Al agregar la clase 'descubierta', la tarjeta se voltea */
+.tarjeta.descubierta {
+    transform: rotateY(180deg);
 }
-#item-4 {
 
-   background-color: #9B779A; 
-   grid-row-start: 2;
-   grid-column-start: 1;
-
-   grid-row-end: 3;
-   grid-column-end: 2;
-   
+/* El reverso y el contenido son las dos caras de la tarjeta */
+.tarjeta_reverso,
+.tarjeta_contenido {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta la cara trasera del elemento volteado */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-#item-5 {
 
-   background-color: #86975C; 
-   grid-row-start: 2;
-   grid-column-start: 2;
-
-   grid-row-end: 3;
-   grid-column-end: 3;
-   
+.tarjeta_reverso {
+    background: linear-gradient(135deg, #42a5f5, #2979ff);
+    color: white;
+    font-weight: bold;
+    font-size: 3rem;
+    /* Puedes usar un ícono, un emoji, o nada. Aquí hay un simple ? */
+    content: '?';
 }
-#item-6 {
 
-   background-color: #AED976; 
-   grid-row-start: 2;
-   grid-column-start: 3;
-
-   grid-row-end: 3;
-   grid-column-end: 4;
-   
+.tarjeta_contenido {
+    background-color: #ffffff;
+    transform: rotateY(180deg); /* La cara del contenido está volteada inicialmente */
 }
-#item-7 {
 
-   background-color: #B7DB57; 
-   grid-row-start: 2;
-   grid-column-start: 4;
-
-   grid-row-end: 3;
-   grid-column-end: 5;
-   
+.tarjeta_contenido img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 5px;
 }
-</style>
-
-<div class="angry-grid">
-  <div id="item-0">&nbsp;</div>
-  <div id="item-1">&nbsp;</div>
-  <div id="item-2">&nbsp;</div>
-  <div id="item-3">&nbsp;</div>
-  <div id="item-4">&nbsp;</div>
-  <div id="item-5">&nbsp;</div>
-  <div id="item-6">&nbsp;</div>
-  <div id="item-7">&nbsp;</div>
-</div>
-
