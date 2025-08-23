@@ -90,3 +90,27 @@
             visibility: visible;
             /* Al hacer clic, se muestra el emoji */
         }
+
+        /* Boton de Reinicio */
+        .controles{
+            margin-top: 5rem;
+            text-align: center;
+            
+            
+        }
+
+        #btn-reinicio{
+            padding: 1rem 1.4rem;
+            font-size:16px;
+            margin-right: 2rem;
+            cursor:pointer;
+            background-color: #1e3f20;
+            border:none;
+            border-radius: 12px;
+            color: white;
+        }
+
+        #intentos{
+            font-size:18px;
+            font-weight: bold;
+        }

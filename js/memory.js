@@ -1,7 +1,7 @@
 let parejasEncontradas = 0;
 let primeraSeleccion = null;
 let bloquearClick = false;
-let intentosRestantes = 3; // Nuevo: contador de intentos 
+let intentosRestantes = 3; //  contador de intentos 
 
 const grupoTarjetas = [
   { image: "./assets/img/img_1.webp", valor: "imagen 1" },
@@ -21,101 +21,112 @@ const barajaTarjetas = () => {
   return totalBarajas.sort(() => Math.random() - 0.5);
 };
 
+// funcion para reiniciar el contador de intentos
+  const actualizarIntentos = () => {
+    document.getElementById("intentos").textContent = `Intentos restantes:${intentosRestantes}`;
+  };
+  
+  // funcion para mostrar game over
+  const mostrarGameOver = (ganador) =>{
+     const mensaje  = ganador ?
+     "Has ganado el Memory !": 
+     "Te has quedado sin intentos, GAME OVER !! ";
+    
+    setTimeout(() =>{
+     alert(mensaje);
+     reparteTarjetas();
+    },500);
+  };
+
 // Construimos el tablero
 const reparteTarjetas = () => {
   // reiniciamos las variables
   let parejasEncontradas = 0;
   let primeraSeleccion = null;
   let bloquearClick = false;
-  intentosRestantes = 3; // Reiniciamos los intentos
-
-// funcion para reiniciar el contador de intentos
-  const actualizarIntentos = () => {
-    document.getElementById("intentos").textContent = `Intentos restantes:${intentosRestantes}`;
-  };
-
-// funcion para mostrar game over
-const mostrarGameOver = () =>{
-   const mensaje  = ganador ?
-   "Has ganado el Memory !": 
-   "Te has quedado sin intentos ";
+  intentosRestantes = 3; 
   
-  setTimeout(() =>{
-   alert(mensaje);
-   reparteTarjetas();
-  },1000);
-};
+  actualizarIntentos();
 
-
-
+  
+  
+  
   // seleccionamos el contenedor
   const mesa = document.querySelector("#mesa");
   // limpiamos por si habia cartas
   mesa.innerHTML = " ";
-
+  
   // obtenemos las cartas mezcladas
   const tarjetasBarajadas = barajaTarjetas();
-
+  
   tarjetasBarajadas.forEach((imagenCarta) => {
     // Contendra el contenedor de la tarjeta
     const tarjeta = document.createElement("div");
     // para los estilos
     tarjeta.className = "tarjeta";
-
+    
     // insertamos la imagen dentro con un div interior
     // tarjeta.innerHTML = `<div class="tarjeta_contenido"> ${imagen}</div>`;
-
+    
     tarjeta.dataset.valor = imagenCarta.valor;
     // insertamos la imagen y su reverso
     tarjeta.innerHTML = `
-            <div class="tarjeta_reverso"></div>
-            <div class="tarjeta_contenido">
-                <img src="${imagenCarta.image}" alt="Carta de memory">
-            </div>
-        `;
-
+    <div class="tarjeta_reverso"></div>
+    <div class="tarjeta_contenido">
+    <img src="${imagenCarta.image}" alt="Carta de memory">
+    </div>
+    `;
+    
     // Añadimos la carta al DOM
     mesa.appendChild(tarjeta);
-
+    
     // Agregamos la interactividad a esta tarjeta
     tarjeta.addEventListener("click", () => {
       // Si el juego está bloqueado o esta tarjeta ya está
-
+      
       if (bloquearClick || tarjeta.classList.contains("descubierta")) {
         return;
       }
       // Mostramos la carta (visualmente)
       tarjeta.classList.add("descubierta");
-
+      
       if (!primeraSeleccion) {
         // Si no hay otra carta seleccionada, guardamos esta
         primeraSeleccion = tarjeta;
       } else {
-        // Ya hay una carta seleccionada → esta es la segunda
+        // Ya hay una carta seleccionada => esta es la segunda
         const segundaSeleccion = tarjeta;
         // Obtenemos los imagenes internos de ambas
         // const imagen1 = primeraSeleccion.querySelector(".tarjeta__contenido").innerText;
         // const imagen2 = segundaSeleccion.querySelector(".tarjeta__contenido").innerText;
         if (primeraSeleccion.dataset.valor === segundaSeleccion.dataset.valor) {
-          // Coinciden → dejamos ambas descubiertasparejasEncontradas++; // Nuevo: contar parejas acertadas
-
+          // Coinciden => dejamos ambas descubiertasparejasEncontradas++; // Nuevo: contar parejas acertadas
+          
           parejasEncontradas++;
           primeraSeleccion = null;
           // Comprobamos si el jugador ha ganado
           if (parejasEncontradas === grupoTarjetas.length) {
-            setTimeout(() => {
-              alert("¡Has ganado el memory!");
-              reparteTarjetas(); // Reinicia el juego
-            }, 500);
+            // nos indica que el jugador ha ganado
+            mostrarGameOver(true);
           }
         } else {
-          // No coinciden → taparlas tras 1 segundo
+          // No coinciden => taparlas tras 1 segundo
           bloquearClick = true;
+          // vamos quitando intentos
+          intentosRestantes--;
+          actualizarIntentos();
+          
+          
           setTimeout(() => {
             primeraSeleccion.classList.remove("descubierta");
             segundaSeleccion.classList.remove("descubierta");
             primeraSeleccion = null;
             bloquearClick = false;
+            
+            if (intentosRestantes === 0) {
+              // el jugador ha perdido
+              mostrarGameOver(false);
+            }
           }, 1000);
         }
       }
@@ -123,4 +134,5 @@ const mostrarGameOver = () =>{
   });
 };
 
+document.querySelector("#btn-reinicio").addEventListener('click',reparteTarjetas);
 reparteTarjetas();

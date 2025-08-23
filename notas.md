@@ -74,3 +74,20 @@ h1 {
 }
 
 <!-- Añ -->
+
+.controls {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#restart-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#attempts {
+    font-size: 18px;
+    font-weight: bold;
+}
