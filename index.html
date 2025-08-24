@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <title>Juego Memory</title>
-   
+
 </head>
 
 <body>
@@ -17,10 +20,17 @@
         <button type="button" id="btn-reinicio">Reiniciar Juego</button>
         <span id="intentos">Intentos restantes: 3</span>
     </div>
-    
 
-  
-<script src="js/memory.js"></script>
+    <div id="game-over">
+        <img src="./assets/img/perdiste.png" alt="game-over" class="game-over-image">
+        <p class="game-over-texto">Has muerto!. Buena Suerte para la próxima</p>
+        <button id="btn-reinicio-game-over" class="restart-btn">Jugar de nuevo</button>
+    </div>
+
+
+
+
+    <script src="js/memory.js"></script>
 </body>
 
 </html>
