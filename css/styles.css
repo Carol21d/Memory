@@ -2,8 +2,6 @@
 
 body {
   font-family: Arial, sans-serif;
-  /* background: -webkit-linear-gradient(90deg, #d2cdc6,#08a693,#3a4d5f,#272c3f);background: linear-gradient(90deg, #d2cdc6,#08a693,#3a4d5f,#272c3f); */
-  /* background-color: #0a0a0a; */
   background-image: url("../assets/img/background.webp");
   background-size: cover;
   background-attachment: fixed;
@@ -11,13 +9,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: 100vh;
   margin: 0;
 }
 
 h1 {
-  font-size: 2.8rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+  text-align: center;
   color: white;
   font-family: "Creepster", system-ui;
   font-weight: 500;
@@ -26,19 +27,21 @@ h1 {
 
 #mesa {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  gap: 15px;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+  gap: 1rem;
   perspective: 1000px;
+  width: 90%;
+  max-width: 600px;
 }
 
 .tarjeta {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  aspect-ratio: 1/1;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
   cursor: pointer;
-
+  border-radius: 12px;
 }
 
 .tarjeta.descubierta {
@@ -55,28 +58,22 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: clamp(1rem, 2vw, 2rem);
   box-shadow: 0 4px 8px black;
 }
 .tarjeta_reverso {
   color: white;
   font-weight: bold;
   font-size: 3rem;
-  content: "?";
-  /* background: linear-gradient(135deg, #42a5f5, #2979ff); */
   background: #8b0000b7;
   border: 2px solid #333333;
 }
 
 .tarjeta_contenido img {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 85%;
+  max-height: 85%;
   border-radius: 5px;
 }
-
-/* .tarjeta:hover {
-  background-color: linear-gradient(135deg, #42a5f5, #2979ff);
-} */
 
 /* la imagen está oculto al principio */
 .tarjeta_contenido {
@@ -92,13 +89,19 @@ h1 {
 
 /* Boton de Reinicio */
 .controles {
-  margin-top: 5rem;
+  margin-top: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-#btn-reinicio {
+#btn-reinicio,
+.restart-btn {
   padding: 1rem 1.4rem;
-  font-size: 18px;
+  font-size: 1.1rem;
   margin-right: 2rem;
   cursor: pointer;
   background-color: #1e3f20;
@@ -111,7 +114,7 @@ h1 {
 }
 
 #intentos {
-  font-size: 22px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #f5f5f5;
   font-family: "Creepster", system-ui;
@@ -144,6 +147,7 @@ h1 {
 
 .game-over-image {
   width: 400px;
+  max-width: 80%;
   border-radius: 40%;
   background-size: contain;
   animation: pulse 1s infinite;
@@ -162,9 +166,50 @@ h1 {
 }
 
 .game-over-texto {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-top: 20px;
   font-family: "Creepster", system-ui;
   font-weight: 400;
   font-style: normal;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #mesa {
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
+    gap: 0.8rem;
+  }
+  .controles {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  #btn-reinicio,
+  .restart-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    margin-right: 0;
+  }
+
+  #intentos {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #mesa {
+    grid-template-columns: repeat(4, minmax(60px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .game-over-image {
+    width: 100%;
+  }
+
+  .game-over-texto {
+    font-size: 1.8rem;
+  }
 }

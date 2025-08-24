@@ -4,14 +4,14 @@ let bloquearClick = false;
 let intentosRestantes = 3;
 
 const grupoTarjetas = [
-  { image: "./assets/img/chucky.wepb", valor: "imagen 1" },
-  { image: "./assets/img/freddy.wepb", valor: "imagen 2" },
-  { image: "./assets/img/halloween.wepb", valor: "imagen 3" },
-  { image: "./assets/img/it.wepb", valor: "imagen 4" },
-  { image: "./assets/img/jason.wepb", valor: "imagen 5" },
-  { image: "./assets/img/saw.wepb", valor: "imagen 6" },
-  { image: "./assets/img/scream.wepb", valor: "imagen 7" },
-  { image: "./assets/img/grito.wepb", valor: "imagen 8" },
+  { image: "./assets/img/chucky.webp", valor: "imagen 1" },
+  { image: "./assets/img/freddy.webp", valor: "imagen 2" },
+  { image: "./assets/img/halloween.webp", valor: "imagen 3" },
+  { image: "./assets/img/it.webp", valor: "imagen 4" },
+  { image: "./assets/img/jason.webp", valor: "imagen 5" },
+  { image: "./assets/img/saw.webp", valor: "imagen 6" },
+  { image: "./assets/img/scream.webp", valor: "imagen 7" },
+  { image: "./assets/img/grito.webp", valor: "imagen 8" },
 ];
 
 const totalBarajas = [...grupoTarjetas, ...grupoTarjetas];
@@ -23,7 +23,7 @@ const barajaTarjetas = () => {
 const actualizarIntentos = () => {
   document.getElementById(
     "intentos"
-  ).textContent = `Intentos restantes: ${intentosRestantes}`;
+  ).textContent = `Remaining Attempts: ${intentosRestantes}`;
 };
 
 // Pantalla de Game Over
@@ -33,11 +33,11 @@ const mostrarGameOver = (ganador) => {
 
   if (ganador) {
     // Si el jugador gana
-    gameoverTexto.textContent = "¡Has ganado sobrevivido!";
+    gameoverTexto.textContent = "You survived!!";
   } else {
     // Si el jugador pierde
     gameoverTexto.textContent =
-      "¡Se te acabaron los intentos! Buena suerte la próxima vez.";
+      "You've run out of attempts! Good luck next time.";
   }
 
   gameOverModal.style.display = "flex";
