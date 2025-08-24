@@ -4,14 +4,14 @@ let bloquearClick = false;
 let intentosRestantes = 3;
 
 const grupoTarjetas = [
-    { image: "./assets/img/img_1.webp", valor: "imagen 1" },
-    { image: "./assets/img/img_2.jpg", valor: "imagen 2" },
-    { image: "./assets/img/img_3.webp", valor: "imagen 3" },
-    { image: "./assets/img/img_4.webp", valor: "imagen 4" },
-    { image: "./assets/img/img_5.webp", valor: "imagen 5" },
-    { image: "./assets/img/img_6.webp", valor: "imagen 6" },
-    { image: "./assets/img/img_7.webp", valor: "imagen 7" },
-    { image: "./assets/img/img_8.webp", valor: "imagen 8" },
+    { image: "./assets/img/chucky.wepb", valor: "imagen 1" },
+    { image: "./assets/img/freddy.wepb", valor: "imagen 2" },
+    { image: "./assets/img/halloween.wepb", valor: "imagen 3" },
+    { image: "./assets/img/it.wepb", valor: "imagen 4" },
+    { image: "./assets/img/jason.wepb", valor: "imagen 5" },
+    { image: "./assets/img/saw.wepb", valor: "imagen 6" },
+    { image: "./assets/img/scream.wepb", valor: "imagen 7" },
+    { image: "./assets/img/grito.wepb", valor: "imagen 8" },
 ];
 
 const totalBarajas = [...grupoTarjetas, ...grupoTarjetas];
@@ -126,7 +126,7 @@ const gameOverImagen = document.getElementById("game-over");
 
 // carga el juego al actualizar pagina
   window.onload = reparteTarjetas;
-  
+
 // document.querySelector("#btn-reinicio").addEventListener('click', reparteTarjetas);
 
 // document.querySelector("#btn-reinicio-game-over").addEventListener('click', () => {
